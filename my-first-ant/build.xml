@@ -1,0 +1,34 @@
+<project name="MyJavaProject" default="jar" basedir=".">
+    
+  <property name="antMainLib.jar" value="../ant-lib/build/jar/antMainLib.jar"/>
+  <property name="main.class" value="example.AntMainClass"/>
+
+  <!-- プロジェクトAのクラスパス定義（ビルド時に読み込まれる） -->
+  <path id="classpath">
+    <pathelement location="${antMainLib.jar}"/>
+  </path>
+
+  <!-- ターゲット: 初期化 -->
+  <target name="init">
+    <delete dir="build"/>  
+  </target>
+
+  <!-- ターゲット: コンパイル -->
+  <target name="compile" depends="init">
+    <mkdir dir="build/classes"/>
+    <javac srcdir="src" destdir="build/classes">
+      <classpath refid="classpath" />
+    </javac>
+  </target>
+
+  <!-- ターゲット: JARファイルの作成 -->
+  <target name="jar" depends="compile">        
+      <mkdir dir="build/jar"/>
+      <jar destfile="build/jar/MyJavaProject.jar" basedir="build/classes">
+        <manifest>
+          <attribute name="Main-Class" value="${main.class}"/>
+        </manifest>
+      </jar>
+  </target>
+    
+</project>

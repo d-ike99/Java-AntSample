@@ -1,0 +1,16 @@
+<project name="MyJavaProject" default="jar" basedir=".">
+    
+    <!-- ターゲット: コンパイル -->
+    <target name="compile">
+        <delete dir="build"/>
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>
+    
+    <!-- ターゲット: JARファイルの作成 -->
+    <target name="jar" depends="compile">        
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/antMainLib.jar" basedir="build/classes" />
+    </target>
+    
+</project>
